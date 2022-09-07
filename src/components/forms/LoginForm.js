@@ -71,6 +71,17 @@ const LoginForm = () => {
           </p>
         </div>
       </div>
+
+      <>
+        {allUserEntries.map((item) => {
+          return (
+            <div className='card'>
+              <p>Email: {item.userEmail}</p>
+              <p>Password: {item.userPassword}</p>
+            </div>
+          );
+        })}
+      </>
     </>
   );
 };
