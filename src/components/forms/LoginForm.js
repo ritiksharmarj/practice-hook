@@ -11,11 +11,18 @@ const LoginForm = () => {
     // To stop page reload
     e.preventDefault();
 
-    const newUser = { userEmail: email, userPassword: password };
+    const newUser = {
+      id: new Date().getTime().toString(),
+      email,
+      password,
+    };
 
     // Store all the entries inlcluding new user entries
     setAllUserEntries([...allUserEntries, newUser]);
-    console.log(allUserEntries);
+
+    // Empty the input fields after submit the form
+    setEmail('');
+    setPassword('');
   };
 
   return (
@@ -33,7 +40,6 @@ const LoginForm = () => {
           <div className='input'>
             <input
               type='text'
-              id='email-field'
               className='input-field'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -46,7 +52,6 @@ const LoginForm = () => {
           <div className='input'>
             <input
               type='password'
-              id='password-field'
               className='input-field'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -74,10 +79,11 @@ const LoginForm = () => {
 
       <>
         {allUserEntries.map((item) => {
+          const { id, email, password } = item;
           return (
-            <div className='card'>
-              <p>Email: {item.userEmail}</p>
-              <p>Password: {item.userPassword}</p>
+            <div className='card' key={id}>
+              <p>Email: {email}</p>
+              <p>Password: {password}</p>
             </div>
           );
         })}
